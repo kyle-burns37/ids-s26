@@ -1,10 +1,10 @@
-## Web Scraping
 
-The presentation was made by Sean Tessman
 
-## Introduction
+The presentation was made by Sean Tessman.
 
-### What is Web Scraping?
+### Introduction
+
+#### What is Web Scraping?
 
 -   Web Scraping is essentially using code to automatically pull information from websites, rather than copy-pasting it by hand.
 -   Websites organize their data using HTML, which is just the basic structure behind what you see on a webpage.
@@ -12,7 +12,7 @@ The presentation was made by Sean Tessman
 
 ------------------------------------------------------------------------
 
-## Why It Matters in Data Science
+### Why It Matters in Data Science
 
 -   A lot of real-world data isn't properly available as a downloadable CSV file.
 -   Web scraping helps us to:
@@ -23,7 +23,7 @@ The presentation was made by Sean Tessman
 
 ------------------------------------------------------------------------
 
-## How Web Pages Work
+### How Web Pages Work
 
 ### HTML Basics
 
@@ -38,27 +38,27 @@ When we scrape a website, we look for the specific tag that contains the informa
 
 ------------------------------------------------------------------------
 
-## Static vs Dynamic Websites
+### Static vs Dynamic Websites
 
-### Static websites (easier to scrape)
+#### Static websites (easier to scrape)
 
 -   The data is already in the HTML you downloaded.
 -   When you request the page, the content you need is usually right there.
 -   Tools like `requests`, `pandas.read_html()`, and BeautifulSoup work well.
 
-### Dynamic websites (harder to scrape)
+#### Dynamic websites (harder to scrape)
 
 -   The page loads, then JavaScript pulls in the data after.
 -   The first HTML you download might be missing the info you want.
 -   You may need Selenium/Playwright, or sometimes an API that the page is calling.
 
-### Why this matters
+#### Why this matters
 
 If a site is dynamic, your scraper might “work” but return empty results.
 
 ------------------------------------------------------------------------
 
-## The Basic Workflow
+### The Basic Workflow
 
 1.  **Pick a website**\
     Make sure the data is public and allowed to be collected.
@@ -74,14 +74,13 @@ If a site is dynamic, your scraper might “work” but return empty results.
 
     ------------------------------------------------------------------------
 
-## Using BeautifulSoup
+### Using BeautifulSoup
 
-### What is BeautifulSoup
+#### What is BeautifulSoup
 
 BeautifulSoup is a Python tool that helps you look through and pull information from a webpage's HTML code. While `pandas.read_html()` is useful for grabbing whole tables, BeautifulSoup is better when you want specific things like text, links, or section titles. It works by organizing the HTML into a structure that makes it easier to search and extract exactly what you need.
 
-### Why use BeautifulSoup?
-
+#### Why use BeautifulSoup?
 -   Get text that isn't in a table\
 -   Grab links or other small pieces of information\
 -   Look for specific parts of a page, like `div`, `p`, or `span`\
@@ -95,9 +94,9 @@ For flexible HTML parsing –\> use BeautifulSoup
 
 ------------------------------------------------------------------------
 
-## Python Setup
+### Python Setup
 
-### Required Libraries
+#### Required Libraries
 
 ```{python}
 import requests
@@ -108,9 +107,9 @@ import matplotlib.pyplot as plt
 
 ------------------------------------------------------------------------
 
-## Example: Scraping a Public Table (Wikipedia)
+### Example: Scraping a Public Table (Wikipedia)
 
-### Step 1: Choose a Page
+#### Step 1: Choose a Page
 
 We’ll scrape a public population table from Wikipedia:
 
@@ -121,7 +120,7 @@ url
 
 ------------------------------------------------------------------------
 
-### Step 2: Request the Page
+#### Step 2: Request the Page
 
 ```{python}
 headers = {
@@ -132,7 +131,7 @@ response = requests.get(url, headers=headers, timeout=30)
 response.status_code
 ```
 
-#### What The Code Does:
+##### What The Code Does:
 
 -   Sets up a header for the website to know who is making the request
 
@@ -146,7 +145,7 @@ response.status_code
 
 ------------------------------------------------------------------------
 
-### Step 3: Extract the Table into a DataFrame
+#### Step 3: Extract the Table into a DataFrame
 
 Instead of going through each table row and cell by one, we can use `pandas.read_html()` to automatically grab the whole table from the webpage.
 
@@ -172,7 +171,7 @@ df.head()
 
 ------------------------------------------------------------------------
 
-### Step 4: Clean the Data
+#### Step 4: Clean the Data
 
 This table usually includes a few “summary” rows that aren’t actual states. We’ll remove them and clean the population column.
 
@@ -217,9 +216,9 @@ This section cleans and prepares the data so it's ready to analyze. It standardi
 
 ------------------------------------------------------------------------
 
-## Example Visualization
+### Example Visualization
 
-### Top 10 States by Population
+#### Top 10 States by Population
 
 ```{python}
 top10 = df_clean.sort_values("population", ascending=False).head(10)
@@ -237,9 +236,9 @@ plt.show()
 
 ------------------------------------------------------------------------
 
-## Saving the Data
+### Saving the Data
 
-### Export to CSV
+#### Export to CSV
 
 ```{python}
 df_clean.to_csv("scraped_population_table.csv", index=False)
@@ -248,9 +247,9 @@ df_clean.to_csv("scraped_population_table.csv", index=False)
 
 ------------------------------------------------------------------------
 
-## Scraping Text (Not Just Tables)
+### Scraping Text (Not Just Tables)
 
-### Example: Pull a Few Headings with BeautifulSoup
+#### Example: Pull a Few Headings with BeautifulSoup
 
 This here shows how scraping isn't just for tables.
 
@@ -265,7 +264,7 @@ headings[:10]
 
 ------------------------------------------------------------------------
 
-## Scraping Responsibly
+### Scraping Responsibly
 
 -   Look at the website's robots.txt file and read its rules before scraping (Terms of Service)
 -   Don't send too many requests too quickly --\> add pauses if you're looping.
@@ -274,7 +273,7 @@ headings[:10]
 
 ------------------------------------------------------------------------
 
-## Limitations
+### Limitations
 
 -   Websites can change their layout, which can cause your scraping code to stop working.
 -   Some sites load content using JavaScript, so you might need a tool like Selenium or an API instead
@@ -282,7 +281,7 @@ headings[:10]
 
 ------------------------------------------------------------------------
 
-## Conclusion
+### Conclusion
 
 -   Web scraping helps you collect public data from websites automatically.
 -   It’s useful when the data isn’t already in a CSV.
@@ -290,7 +289,7 @@ headings[:10]
 -   APIs are usually more stable when they exist.
 -   Scraping can break if a website changes, so it needs maintenance.
 
-## References
+### References
 
 Wikipedia contributors. (2025). *List of U.S. states and territories by population*. Wikipedia.\
 <https://en.wikipedia.org/wiki/List_of_U.S._states_and_territories_by_population>
@@ -301,6 +300,3 @@ CCS Learning Academy. (2024). *What is web scraping?*\
 Real Python. (2024). *Beautiful Soup: Build a web scraper with Python*.\
 [https://realpython.com/beautiful-soup-web-scraper-python/](https://realpython.com/beautiful-soup-web-scraper-python/?utm_source=chatgpt.com)
 
-## Thank You
-
-### Questions?
