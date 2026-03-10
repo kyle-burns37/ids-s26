@@ -2,6 +2,11 @@
 
 {{< include _kmeans.qmd >}} 
 
+- SQL and Data Manipulation
+ - `_SQL_and_Data_Manipulation.qmd`
+{{< include _SQL_and_Data_Manipulation.qmd >}}
+
+
 {{< include _ImportExportData.qmd >}} 
 
 {{< include _pandas.qmd >}} 
