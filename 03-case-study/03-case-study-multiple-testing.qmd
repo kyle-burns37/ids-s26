@@ -445,7 +445,7 @@ fig.show()
 
 ### t-statistics versus intensity
 
-The paper also argues that large t-statistics do not simply correspond to low-intensity artifacts. This plot helps students see that issue directly.
+The paper also argues that large t-statistics do not simply correspond to low-intensity artifacts. This plot helps us see that issue directly.
 
 ```{python}
 fig = px.scatter(
@@ -469,7 +469,7 @@ Then even under complete null truth, we would expect approximately
 - $6384 \times 0.01 \approx 64$ p-values below 0.01,
 - $6384 \times 0.001 \approx 6.4$ p-values below 0.001.
 
-That simple calculation is often the first moment students realize that "p < 0.05" is not remotely enough in a high-dimensional setting.
+That simple calculation is often the first moment we realize that "p < 0.05" is not remotely enough in a high-dimensional setting.
 
 ```{python}
 alpha_grid = np.array([0.05, 0.01, 0.001, 0.0001])
@@ -590,7 +590,7 @@ results.nsmallest(10, "p_value")[["gene_id", "mean_diff", "t_stat", "p_value", "
 
 ## Permutation-based FDR estimation
 
-Now we turn to the main teaching goal of this case study: estimating how many of our apparent discoveries may be false.
+Now we turn to the main goal of this case study: estimating how many of our apparent discoveries may be false.
 
 One intuitive approach is to estimate FDR by permutation:
 
@@ -674,7 +674,7 @@ In this dataset, the estimated FDR is much lower at the most stringent threshold
 
 ## Identify a small high-confidence gene set
 
-A common teaching question at this point is: after all of this adjustment and checking, what genes would we actually carry forward for follow-up?
+The remaining question at this point is: after all of this adjustment and checking, what genes would we actually carry forward for follow-up?
 
 One simple answer is to focus on the genes with raw p-values below `0.0001`, which is a very stringent cutoff in this example.
 
@@ -684,7 +684,6 @@ selected = selected.sort_values("p_value")
 selected
 ```
 
-This is not the only possible decision rule, but it is a useful one for classroom discussion because it produces a short list that students can inspect directly and compare against the broader BH and permutation-based summaries.
 
 ## What should we report?
 
@@ -726,15 +725,15 @@ final_summary
 ## Discussion questions
 
 1. Why is `p < 0.05` not a sensible default rule when testing 6384 genes?
-2. Why does permutation help in a microarray problem where the null distribution and dependence structure may be complicated?
+2. Why does permutation help in this problem where the null distribution and dependence structure may be complicated?
 3. Why can a method that reduces Type I errors too aggressively also be scientifically unsatisfying?
 4. What is the conceptual difference between controlling the family-wise error rate and controlling the false discovery rate?
-5. The paper discusses adjusted p-values, but the supplied teaching code estimates FDR at a few thresholds. What are the strengths and weaknesses of each strategy?
+
 
 ## Exercises
 
 1. Increase the number of permutations from 50 to 200 and see how stable the FDR estimates become.
 2. Add a histogram of the p-values and explain what shape you would expect under a complete null.
-3. Compare Welch’s t-test with the equal-variance two-sample t-test and check whether the top-ranked genes change.
+3. Compare Welch's t-test with the equal-variance two-sample t-test and check whether the top-ranked genes change.
 4. Use a grid of thresholds from `1e-5` to `1e-2` and plot the entire estimated FDR curve.
 5. Repeat the Type I / Type II simulation with a smaller true effect and explain what happens to power.
